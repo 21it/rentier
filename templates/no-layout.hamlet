@@ -1,0 +1,14 @@
+<div .padded>
+  $if not $ null parents
+    <div .container>
+      <ul .breadcrumb>
+          $forall bc <- reverse $ (take 1) $ reverse parents
+              <li>
+                  <a .text-capitalize href="@{fst bc}">#{snd bc}
+
+          <li .active.text-capitalize>#{title}
+  ^{widget}
+  <footer .footer>
+    <div .container.text-center>
+      <p .text-muted>
+        #{appCopyright $ appSettings master}

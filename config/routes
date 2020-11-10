@@ -1,0 +1,29 @@
+-- By default this file is used by `parseRoutesFile` in Foundation.hs
+-- Syntax for this file here: https://www.yesodweb.com/book/routing-and-handlers
+
+/static StaticR Static appStatic
+/favicon.ico FaviconR GET
+/robots.txt RobotsR GET
+
+/auth   AuthR   Auth   getAuth
+/language/#Rentier.Language.Code LanguageR GET
+
+/ HomeR GET
+/signout SignoutR GET
+/profile ProfileR GET POST
+/employee/login EmployeeLoginR GET
+/merchant/create MerchantCreateR GET POST
+/merchant/#MerchantId/organization/list OrganizationListR GET
+/merchant/#MerchantId/organization/create OrganizationCreateR GET POST
+/merchant/#MerchantId/organization/#OrganizationId/update OrganizationUpdateR GET POST
+/merchant/#MerchantId/organization/#OrganizationId/schedule/create OrganizationScheduleCreateR GET POST
+/merchant/#MerchantId/organization/#OrganizationId/schedule/#OrganizationScheduleId/update OrganizationScheduleUpdateR GET POST
+/merchant/#MerchantId/organization/#OrganizationId/schedule/#OrganizationScheduleId/delete OrganizationScheduleDeleteR GET
+/merchant/#MerchantId/organization/#OrganizationId/property/create PropertyCreateR GET POST
+/merchant/#MerchantId/organization/#OrganizationId/property/#PropertyId/update PropertyUpdateR GET POST
+/merchant/#MerchantId/employee/list EmployeeListR GET
+/merchant/#MerchantId/employee/create EmployeeCreateR GET POST
+
+/iframe/property/#PropertyId/schedule IframePropertyScheduleR GET
+/iframe/property/#PropertyId/session/create/starts-at/#UTC/ends-at/#UTC IframeSessionCreateR GET POST
+/iframe/property/#PropertyId/session/create/starts-at/#UTC/ends-at/#UTC/additional-properties/#PropertiesMultipleSelection/customer-comment/#Text IframeSessionConfirmR GET

@@ -1,0 +1,27 @@
+<div .ui.container.text-center>
+  <h2 .margin-bottom>_{MsgGeneralInfo}
+^{organizationFormWidget}
+<div .ui.container.text-center.margin-top>
+  $if null organizationScheduleRules
+    <p .compact.center-block>
+      _{MsgOrganizationScheduleEmpty}
+  $else
+    <h2 .margin-bottom.margin-top>_{MsgSchedule}
+    ^{tableScheduleRulesWidget}
+<div .ui.container.compact.margin-top>
+  <a href="@{OrganizationScheduleCreateR merchantId organizationId}" .btn.btn-primary.col-xs-12>
+    _{MsgOrganizationScheduleCreate}
+<div .ui.container.text-center.margin-top>
+  $if null organizationProperty
+    <p .compact.center-block>
+      _{MsgPropertyEmpty}
+  $else
+    $if not $ null organizationPrimaryProperty
+      <h2 .margin-bottom.margin-top>_{MsgPropertyPrimary}
+      ^{tablePrimaryPropertyWidget}
+    $if not $ null organizationSecondaryProperty
+      <h2 .margin-bottom.margin-top>_{MsgPropertySecondary}
+      ^{tableSecondaryPropertyWidget}
+<div .ui.container.compact.margin-top>
+  <a href="@{PropertyCreateR merchantId organizationId}" .btn.btn-primary.col-xs-12>
+    _{MsgPropertyCreate}

@@ -1,0 +1,5 @@
+<div .ui.container.compact>
+  <form role=form method=post enctype=#{formEnctype} action=@{formRoute}>
+    ^{formWidget}
+    <div .text-center>
+      <button type="submit" .btn.btn-primary.col-xs-12>_{formMsgSubmit}

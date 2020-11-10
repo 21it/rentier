@@ -1,0 +1,48 @@
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    height: "auto",
+    plugins: ['timeGrid'],
+    timeZone: 'UTC',
+    defaultView: 'timeGridFourDay',
+    allDaySlot: false,
+    locale: #{toJSON $ hr2Text MsgIso639v1},
+    displayEventTime: false,
+    slotDuration: #{toJSON $ hr2Text iframeTimeResolution},
+    slotLabelFormat: {
+      hour: 'numeric',
+      minute: '2-digit',
+      omitZeroMinute: false,
+      meridiem: 'short',
+      hour12: false
+    },
+    titleFormat: {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    },
+    header: {
+      left: '',
+      center: 'title',
+      right: 'prev,next'
+    },
+    views: {
+      timeGridFourDay: {
+        type: 'timeGrid',
+        duration: {days: 4}
+      }
+    },
+    events: {
+      url: "@{IframePropertyScheduleR propertyId}",
+      extraParams: {_accept: "application/json"}
+    },
+    eventClick: function(info) {
+      var propertyId = #{toJSON $ toPathPiece propertyId};
+      var e = info.event;
+      window.location.href = "/iframe/property/" + propertyId + "/session/create/starts-at/" + e.start.toISOString() + "/ends-at/" + e.end.toISOString();
+    }
+  });
+
+  calendar.render();
+});

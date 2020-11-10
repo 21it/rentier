@@ -1,0 +1,9 @@
+<div .ui.container.text-center>
+  $if null list
+    <p>
+      _{listMsgEmpty}
+  $else
+    ^{tableWidget}
+<div .ui.container.compact.margin-top>
+  <a href="@{listCreateRoute}" .btn.btn-primary.col-xs-12>
+    _{listMsgCreate}

@@ -1,0 +1,29 @@
+<div .ui.container.compact.center>
+  <div .row>
+    $case mrole
+      $of Nothing
+        <p .lead.text-center>
+          _{MsgProfilePageGreetAnon ident}
+        <div .col-xs-12>
+          <a href="@{MerchantCreateR}" .btn.btn-warning.col-xs-12>
+            _{MsgLoginAsMerchant}
+        <div .col-xs-12.margin-top>
+          <a href="@{EmployeeLoginR}" .btn.btn-warning.col-xs-12>
+            _{MsgLoginAsEmployee}
+      $of Just (UserRoleMerchant merchantId)
+        <p .lead.text-center>
+          _{MsgProfilePageGreetMerchant ident}
+        <div .col-xs-12>
+          <a href="@{OrganizationListR merchantId}" .btn.btn-warning.col-xs-12>
+            _{MsgMyOrganizations}
+        <div .col-xs-12.margin-top>
+          <a href="@{EmployeeListR merchantId}" .btn.btn-warning.col-xs-12>
+            _{MsgMyEmployees}
+      $of Just UserRoleEmployee
+        <p .lead.text-center>
+          _{MsgProfilePageGreetEmployee ident}
+      $of Just UserRoleCustomer
+        <p .lead.text-center>
+          _{MsgProfilePageGreetCustomer ident}
+  <div .row.margin-top>
+    ^{form}

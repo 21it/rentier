@@ -1,0 +1,52 @@
+li {
+    line-height: 2em;
+    font-size: 16px
+}
+
+.masthead {
+  margin:     0;
+  padding:    0;
+  top:        0;
+  bottom:     0;
+  right:      0;
+  left:       0;
+  width:      100%;
+  height:     100vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  color:      white;
+  text-align: center;
+  background-image:     url(@{StaticR index_bg_jpeg});
+  background-repeat:    no-repeat;
+  background-size:      cover;
+  background-position:  bottom;
+}
+
+.masthead-primary-wrapper {
+  margin-top: 20vh;
+  margin-left: 15vmin;
+  margin-right: 15vmin;
+}
+
+.masthead-primary {
+  font-size: 5.35vh;
+  line-height: 1.1;
+  max-width: 450px;
+}
+
+.masthead-secondary-wrapper {
+  margin-top: 7vmin;
+  margin-left: 15vmin;
+  margin-right: 15vmin;
+  margin-bottom: 18px;
+}
+
+.masthead-secondary {
+  font-size: 3vh;
+  line-height: 1.1;
+  max-width: 450px;
+}
+
+.masthead .btn {
+    margin: 1.5vh 0;
+}

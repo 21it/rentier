@@ -1,0 +1,9 @@
+<div .ui.container.text-center>
+  $if null organizations
+    <p>
+      _{MsgEmptyOrganizations}
+  $else
+    ^{tableOrganizationsWidget}
+<div .ui.container.compact.margin-top>
+  <a href="@{OrganizationCreateR merchantId}" .btn.btn-primary.col-xs-12>
+    _{MsgOrganizationCreate}
