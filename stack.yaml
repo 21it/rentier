@@ -18,7 +18,7 @@
 #
 # resolver: ./custom-snapshot.yaml
 # resolver: https://example.com/snapshots/2018-01-01.yaml
-resolver: lts-11.22
+resolver: lts-14.27
 ghc-options:
     "$locals": -optP-Wno-nonportable-include-path
 
@@ -48,7 +48,6 @@ extra-deps:
 - colonnade-1.2.0.1
 - yesod-elements-1.1
 - range-0.2.1.1
-- esqueleto-3.0.0
 
 # Override default flag values for local packages and extra-deps
 # flags: {}
