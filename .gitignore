@@ -1,3 +1,9 @@
+pkg.nix
+nix/pkg.nix
+result
+postgres
+postgres_data
+postgres.log
 dist*
 static/tmp/
 static/combined/
