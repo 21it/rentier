@@ -16,7 +16,10 @@ in
   vimBackground ? "light",
   vimColorScheme ? "PaperColor",
   gitAuthorName,
-  gitAuthorEmail
+  gitAuthorEmail,
+  firebaseApiKey,
+  firebaseProjectId,
+  firebaseMsgSenderId
 }:
 with pkgs;
 
@@ -48,7 +51,10 @@ stdenv.mkDerivation {
   ROBOT_SSH_KEY=robotSshKey;
   GIT_AUTHOR_NAME=gitAuthorName;
   GIT_AUTHOR_EMAIL=gitAuthorEmail;
-  EMAIL = gitAuthorEmail;
+  EMAIL=gitAuthorEmail;
+  FIREBASE_API_KEY=firebaseApiKey;
+  FIREBASE_PROJECT_ID=firebaseProjectId;
+  FIREBASE_MSG_SENDER_ID=firebaseMsgSenderId;
   shellHook = ''
     source ./nix/export-test-envs.sh
     sh ./nix/reset-test-data.sh

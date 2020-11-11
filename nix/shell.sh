@@ -26,6 +26,9 @@ docker run -it --rm \
    --argstr vimColorScheme $VIM_COLOR_SCHEME \
    --argstr gitAuthorName $GIT_AUTHOR_NAME \
    --argstr gitAuthorEmail $GIT_AUTHOR_EMAIL \
+   --argstr firebaseApiKey $FIREBASE_API_KEY \
+   --argstr firebaseProjectId $FIREBASE_PROJECT_ID \
+   --argstr firebaseMsgSenderId $FIREBASE_MSG_SENDER_ID \
    --option sandbox false \
    -v --show-trace
   "
