@@ -1,3 +1,5 @@
+let nixpkgs-master = import (import ./nixpkgs-master.nix) {};
+in
 {
   hexOrganization,
   hexApiKey,
@@ -18,6 +20,7 @@
         ) {inherit vimBackground vimColorScheme;};
         haskellPackages = super.haskell.packages.ghc865.extend(
           self': super': {
+            yesod-bin = nixpkgs-master.haskellPackages.yesod-bin;
             universum = dontCheck super'.universum;
             proto3-suite = dontCheck (doJailbreak super'.proto3-suite);
             hspec-wai-json = callPackage ./overlay/hspec-wai-json.nix {};

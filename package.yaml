@@ -81,12 +81,18 @@ library:
       - -Wall
       - -fwarn-tabs
       - -O0
+      - -optl-fuse-ld=gold
+      ld-options:
+      - -fuse-ld=gold
       cpp-options: -DDEVELOPMENT
     else:
       ghc-options:
       - -Wall
       - -fwarn-tabs
       - -O2
+      - -optl-fuse-ld=gold
+      ld-options:
+      - -fuse-ld=gold
 
 # Runnable executable for our application
 executables:
@@ -97,6 +103,9 @@ executables:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    - -optl-fuse-ld=gold
+    ld-options:
+    - -fuse-ld=gold
     dependencies:
     - rentier
     when:
