@@ -141,9 +141,7 @@ getLoginR = do
                     now
                     jwt
               case eclaims of
-                Left (_ :: JWT.JWTError) -> do
-                  liftIO $ print eclaims
-                  authFailed
+                Left (_ :: JWT.JWTError) -> authFailed
                 Right claims ->
                   case phoneFromClaims claims of
                     Nothing -> authFailed
