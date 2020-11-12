@@ -4,9 +4,16 @@ Free and open source online booking software for small and medium enterprises.
 
 ## Environment
 
-- FIREBASE_API_KEY
-- FIREBASE_PROJECT_ID
-- FIREBASE_MSG_SENDER_ID
+Phone number authentication of merchants, employees and customers is outsourced to Google Firebase service. These environment variables are mandatory. They can be obtained from the [Google Firebase](https://console.firebase.google.com/) console for free. This requires a Google account. It's possible to use dummy values to play around with the project codebase, but user authentication will not work without real credentials.
+
+- `FIREBASE_API_KEY`
+- `FIREBASE_PROJECT_ID`
+- `FIREBASE_MSG_SENDER_ID`
+
+It's possible to customize IDE color schemes with following optional environment variables
+
+- `VIM_BACKGROUND` "light" (default) or "dark"
+- `VIM_COLOR_SCHEME` "PaperColor" (default) or "jellybeans"
 
 ## Development
 
