@@ -1,127 +1,152 @@
-{-# LANGUAGE FlexibleContexts      #-}
-{-# LANGUAGE FlexibleInstances     #-}
+{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE OverloadedStrings     #-}
-{-# LANGUAGE QuasiQuotes           #-}
-{-# LANGUAGE RankNTypes            #-}
-{-# LANGUAGE ScopedTypeVariables   #-}
-{-# LANGUAGE TypeFamilies          #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE QuasiQuotes #-}
+{-# LANGUAGE RankNTypes #-}
+{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE TypeFamilies #-}
 
 module Yesod.Auth.Firebase
-  (authFirebase, FirebaseSettings(..), YesodAuthFirebase(..)) where
+  ( authFirebase,
+    FirebaseSettings (..),
+    YesodAuthFirebase (..),
+  )
+where
 
-import           Control.Error.Util
-import           Control.Lens               (preview, _Just)
-import           Control.Monad.Trans.Except (runExceptT)
-import qualified Crypto.JOSE.JWK            as JWK
-import           Crypto.JOSE.JWK.Store      (VerificationKeyStore (..))
-import qualified Crypto.JOSE.Types          as JTypes
-import qualified Crypto.JWT                 as JWT
-import           Crypto.PubKey.RSA.Types    (PublicKey (..))
-import           Data.Aeson
-import           Data.ByteString
+import Control.Error.Util
+import Control.Lens (_Just, preview)
+import Control.Monad.Trans.Except (runExceptT)
+import qualified Crypto.JOSE.JWK as JWK
+import Crypto.JOSE.JWK.Store (VerificationKeyStore (..))
+import qualified Crypto.JOSE.Types as JTypes
+import qualified Crypto.JWT as JWT
+import Crypto.PubKey.RSA.Types (PublicKey (..))
+import Data.Aeson
+import Data.ByteString
 import qualified Data.ByteString.Char8
 import qualified Data.ByteString.Lazy.Char8
-import           Data.Either.Combinators
-import           Data.EitherR
-import           Data.HashMap.Strict
-import           Data.Map.Strict
-import           Data.Maybe                 (catMaybes)
-import qualified Data.PEM                   as Pem
-import           Data.Text
-import           Data.Time.Clock
-import qualified Data.X509                  as X509
-import           Lens.Micro                 ((&), (.~))
-import           Network.HTTP.Simple
-import           Safe
-import           Yesod.Auth                 (AuthHandler, AuthPlugin (..),
-                                             AuthRoute, Creds (..), Route (..),
-                                             YesodAuth, loginErrorMessageI,
-                                             setCredsRedirect)
-import qualified Yesod.Auth.Message         as Msg
-import           Yesod.Core
+import Data.Either.Combinators
+import Data.EitherR
+import Data.HashMap.Strict
+import Data.Map.Strict
+import Data.Maybe (catMaybes)
+import qualified Data.PEM as Pem
+import Data.Text
+import Data.Time.Clock
+import qualified Data.X509 as X509
+import Lens.Micro ((&), (.~))
+import Network.HTTP.Simple
+import Safe
+import Yesod.Auth
+  ( AuthHandler,
+    AuthPlugin (..),
+    AuthRoute,
+    Creds (..),
+    Route (..),
+    YesodAuth,
+    loginErrorMessageI,
+    setCredsRedirect,
+  )
+import qualified Yesod.Auth.Message as Msg
+import Yesod.Core
 
-data FirebaseSettings = FirebaseSettings {
-  apiKey        :: Text
-  , projectId   :: Text
-  , msgSenderId :: Text
-}
+data FirebaseSettings
+  = FirebaseSettings
+      { apiKey :: Text,
+        projectId :: Text,
+        msgSenderId :: Text
+      }
 
 class (YesodAuth site) => YesodAuthFirebase site where
   -- | JWT AUD for Firebase auth validators
   jwtAud :: AuthHandler site Text
 
 newtype GoogleCertStorage = GoogleCertStorage String
+
 instance (MonadIO m, JWT.HasKid h) => VerificationKeyStore m (h p) JWT.ClaimsSet GoogleCertStorage where
-  getVerificationKeys h _ (GoogleCertStorage keyURL) = liftIO $
-    fmap catMaybes . traverse findKey $ catMaybes
-      [ preview (JWT.kid . _Just . JWT.param) h ]
+  getVerificationKeys h _ (GoogleCertStorage keyURL) =
+    liftIO
+      $ fmap catMaybes . traverse findKey
+      $ catMaybes
+        [preview (JWT.kid . _Just . JWT.param) h]
     where
       bytesToCert :: ByteString -> Either Text X509.Certificate
       bytesToCert s = do
-          pems <- fmapL Data.Text.pack $
-                  Pem.pemParseBS s
-          pem <- note "No pem found" $
-                 headMay pems
-          signedExactCert <- fmapL Data.Text.pack $
-                             X509.decodeSignedCertificate $
-                             Pem.pemContent pem
-          return $ X509.signedObject $ X509.getSigned signedExactCert
-
+        pems <-
+          fmapL Data.Text.pack $
+            Pem.pemParseBS s
+        pem <-
+          note "No pem found" $
+            headMay pems
+        signedExactCert <-
+          fmapL Data.Text.pack
+            $ X509.decodeSignedCertificate
+            $ Pem.pemContent pem
+        return $ X509.signedObject $ X509.getSigned signedExactCert
       certToJwk :: X509.Certificate -> Either Text JWT.JWK
       certToJwk cert = do
-          (n, e) <- note "Unexpected cert format" $ getRSAKey $
-                          X509.certPubKey cert
-          let
-            jwk = JWK.fromKeyMaterial $ JWK.RSAKeyMaterial $
-                  JWK.RSAKeyParameters (JTypes.Base64Integer n)
-                  (JTypes.Base64Integer e) Nothing
-            in return $ jwk & JWK.jwkKeyOps .~ Just [JWK.Verify]
-          where
-            getRSAKey (X509.PubKeyRSA (PublicKey _ n e)) = Just (n, e)
-            getRSAKey _                                  = Nothing
-
+        (n, e) <-
+          note "Unexpected cert format" $ getRSAKey $
+            X509.certPubKey cert
+        let jwk =
+              JWK.fromKeyMaterial $ JWK.RSAKeyMaterial $
+                JWK.RSAKeyParameters
+                  (JTypes.Base64Integer n)
+                  (JTypes.Base64Integer e)
+                  Nothing
+         in return $ jwk & JWK.jwkKeyOps .~ Just [JWK.Verify]
+        where
+          getRSAKey (X509.PubKeyRSA (PublicKey _ n e)) = Just (n, e)
+          getRSAKey _ = Nothing
       findKey :: Text -> IO (Maybe JWT.JWK)
       findKey kidValue = do
         request <- parseRequest keyURL
-        response <- httpJSONEither request :: IO(Response (Either JSONException (Map Text Text)))
+        response <- httpJSONEither request :: IO (Response (Either JSONException (Map Text Text)))
         return $ do
-          dict <- rightToMaybe $
-                  getResponseBody response
+          dict <-
+            rightToMaybe $
+              getResponseBody response
           raw <- Data.Map.Strict.lookup kidValue dict
-          cert <- rightToMaybe $
-                  bytesToCert $
-                  Data.ByteString.Char8.pack $
-                  Data.Text.unpack raw
+          cert <-
+            rightToMaybe
+              $ bytesToCert
+              $ Data.ByteString.Char8.pack
+              $ Data.Text.unpack raw
           rightToMaybe $ certToJwk cert
 
 loginR :: AuthRoute
 loginR = PluginR "firebase" ["login"]
 
-getLoginR :: YesodAuthFirebase site  => AuthHandler site TypedContent
+getLoginR :: YesodAuthFirebase site => AuthHandler site TypedContent
 getLoginR = do
   mtoken <- lookupGetParam "token"
   case mtoken of
     Nothing -> authFailed
     Just token ->
       case defcodeJWT token of
-        Left _    -> authFailed
+        Left _ -> authFailed
         Right jwt -> do
           jwtAudV <- jwtAud
           case preview JWT.stringOrUri jwtAudV of
-            Nothing  -> authFailed
+            Nothing -> authFailed
             Just aud -> do
               now <- liftIO getCurrentTime
-              eclaims <- runExceptT $ JWT.verifyClaimsAt
-                        (JWT.defaultJWTValidationSettings (== aud))
-                        (GoogleCertStorage "https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com")
-                        now
-                        jwt
+              let settings = JWT.defaultJWTValidationSettings (== aud)
+              eclaims <-
+                runExceptT $
+                  JWT.verifyClaimsAt
+                    (settings & JWT.jwtValidationSettingsCheckIssuedAt .~ False)
+                    (GoogleCertStorage "https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com")
+                    now
+                    jwt
               case eclaims of
-                Left (_ :: JWT.JWTError) -> authFailed
+                Left (_ :: JWT.JWTError) -> do
+                  liftIO $ print eclaims
+                  authFailed
                 Right claims ->
                   case phoneFromClaims claims of
-                    Nothing    -> authFailed
+                    Nothing -> authFailed
                     Just phone -> setCredsRedirect (Creds "firebase" phone [])
   where
     authFailed = loginErrorMessageI LoginR Msg.AuthError
@@ -132,8 +157,8 @@ phoneFromClaims claims =
     Object hm ->
       case Data.HashMap.Strict.lookup "phone_number" hm of
         Just (String phone) -> Just phone
-        _                   -> Nothing
-    _         ->
+        _ -> Nothing
+    _ ->
       Nothing
 
 defcodeJWT :: Text -> Either JWT.JWTError JWT.SignedJWT
@@ -145,7 +170,7 @@ authFirebase msgIso639v1 msgIso3166v1 firebaseSettings =
   AuthPlugin "firebase" dispatch loginWidget
   where
     dispatch "GET" ["login"] = getLoginR >>= sendResponse
-    dispatch _ _             = notFound
+    dispatch _ _ = notFound
     projectIdV = projectId firebaseSettings
     loginWidget toMaster =
       [whamlet|
