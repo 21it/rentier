@@ -57,7 +57,6 @@ stdenv.mkDerivation {
   FIREBASE_MSG_SENDER_ID=firebaseMsgSenderId;
   shellHook = ''
     source ./nix/export-test-envs.sh
-    sh ./nix/reset-test-data.sh
     sh ./nix/spawn-test-deps.sh
 
     export HOOGLEDB=/root/.hoogle

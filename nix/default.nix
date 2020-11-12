@@ -35,7 +35,6 @@ in
     doHaddock = false;
     preCheck = ''
       source ./nix/export-test-envs.sh;
-      sh ./nix/reset-test-data.sh;
       sh ./nix/spawn-test-deps.sh;
     '';
     postCheck = ''
