@@ -2,7 +2,7 @@
 
 Free and open source online booking software for small and medium enterprises.
 
-## Environment variables
+## Environment
 
 - FIREBASE_API_KEY
 - FIREBASE_PROJECT_ID

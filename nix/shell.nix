@@ -3,20 +3,11 @@ in
 {
   pkgs ? import nixpkgs {
     overlays = import ./overlay.nix {
-      inherit hexOrganization
-              hexApiKey
-              robotSshKey
-              vimBackground
-              vimColorScheme;
+      inherit vimBackground vimColorScheme;
     };
   },
-  hexOrganization ? null, # organization account name on hex.pm
-  hexApiKey ? null,       # plain text account API key on hex.pm
-  robotSshKey ? null,     # base64-encoded private id_rsa (for private git)
   vimBackground ? "light",
   vimColorScheme ? "PaperColor",
-  gitAuthorName,
-  gitAuthorEmail,
   firebaseApiKey,
   firebaseProjectId,
   firebaseMsgSenderId
@@ -34,24 +25,16 @@ stdenv.mkDerivation {
     git
     haskellPackages.yesod-bin
     nix-prefetch-scripts
-    openssh
     cabal2nix
-    protobuf
     cacert
-    xxd
   ];
 
   TERM="xterm-256color";
+  LANG="C.UTF-8";
   LC_ALL="C.UTF-8";
   GIT_SSL_CAINFO="${cacert}/etc/ssl/certs/ca-bundle.crt";
   NIX_SSL_CERT_FILE="${cacert}/etc/ssl/certs/ca-bundle.crt";
   NIX_PATH="/nix/var/nix/profiles/per-user/root/channels";
-  HEX_ORGANIZATION=hexOrganization;
-  HEX_API_KEY=hexApiKey;
-  ROBOT_SSH_KEY=robotSshKey;
-  GIT_AUTHOR_NAME=gitAuthorName;
-  GIT_AUTHOR_EMAIL=gitAuthorEmail;
-  EMAIL=gitAuthorEmail;
   FIREBASE_API_KEY=firebaseApiKey;
   FIREBASE_PROJECT_ID=firebaseProjectId;
   FIREBASE_MSG_SENDER_ID=firebaseMsgSenderId;

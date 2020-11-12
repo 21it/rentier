@@ -1,9 +1,6 @@
 let nixpkgs-master = import (import ./nixpkgs-master.nix) {};
 in
 {
-  hexOrganization,
-  hexApiKey,
-  robotSshKey,
   vimBackground ? "light",
   vimColorScheme ? "PaperColor"
 }:
@@ -16,8 +13,10 @@ in
     in
       {
         haskell-ide = import (
-          fetchTarball "https://github.com/tim2CF/ultimate-haskell-ide/tarball/d455f6a3c7f7c363efa65da2ff003dbf3b4228d2"
-        ) {inherit vimBackground vimColorScheme;};
+          fetchTarball {
+            url="https://github.com/tim2CF/ultimate-haskell-ide/tarball/d455f6a3c7f7c363efa65da2ff003dbf3b4228d2";
+            sha256="0c95wr7c4q2jsn6sy33xqwarrs1qdbmvr5b6nsgpfazvzflc9h7p";
+          }) {inherit vimBackground vimColorScheme;};
         haskellPackages = super.haskell.packages.ghc865.extend(
           self': super': {
             yesod-bin = nixpkgs-master.haskellPackages.yesod-bin;

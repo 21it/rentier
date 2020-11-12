@@ -2,21 +2,14 @@ let nixpkgs = import ./nixpkgs.nix;
 in
 {
   pkgs ? import nixpkgs {
-    overlays = import ./overlay.nix {
-      inherit hexOrganization
-              hexApiKey
-              robotSshKey;
-    };
-  },
-  hexOrganization ? null, # organization account name on hex.pm
-  hexApiKey ? null,       # plain text account API key on hex.pm
-  robotSshKey ? null      # base64-encoded private id_rsa (for private git)
+    overlays = import ./overlay.nix {};
+  }
 }:
 with pkgs;
 
 let callPackage = lib.callPackageWith haskellPackages;
     pkg = callPackage ./pkg.nix {inherit stdenv;};
-    systemDeps = [ protobuf makeWrapper cacert ];
+    systemDeps = [ makeWrapper cacert ];
     testDeps = [ postgresql ];
 in
   haskell.lib.overrideCabal pkg (drv: {
