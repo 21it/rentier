@@ -74,20 +74,20 @@ IframePropertyScheduleRBreadcrumb: Schedule
 IframeSessionCreateRBreadcrumb: Reservation
 IframeSessionConfirmRBreadcrumb: Confirm
 
-HomeRTitle: Welcome | Reserfy
-SignoutRTitle: Logout | Reserfy
-ProfileRTitle ident@Text: #{ident} | Reserfy
-MerchantCreateRTitle ident@Text: #{ident} | Reserfy
-OrganizationListRTitle ident@Text: Organizations | #{ident} | Reserfy
-OrganizationCreateRTitle ident@Text: New organization | #{ident} | Reserfy
-OrganizationUpdateRTitle ident@Text: #{ident} | Reserfy
-OrganizationScheduleCreateRTitle ident@Text: New schedule rule | #{ident} | Reserfy
-OrganizationScheduleUpdateRTitle ident@Text: Edit schedule rule | #{ident} | Reserfy
-OrganizationScheduleDeleteRTitle ident@Text: Delete schedule rule | #{ident} | Reserfy
-PropertyCreateRTitle ident@Text: New property | #{ident} | Reserfy
-PropertyUpdateRTitle ident@Text: #{ident} | Reserfy
-EmployeeListRTitle ident@Text: Employees | #{ident} | Reserfy
-EmployeeCreateRTitle ident@Text: New employee | #{ident} | Reserfy
+HomeRTitle: Welcome | Rentier
+SignoutRTitle: Logout | Rentier
+ProfileRTitle ident@Text: #{ident} | Rentier
+MerchantCreateRTitle ident@Text: #{ident} | Rentier
+OrganizationListRTitle ident@Text: Organizations | #{ident} | Rentier
+OrganizationCreateRTitle ident@Text: New organization | #{ident} | Rentier
+OrganizationUpdateRTitle ident@Text: #{ident} | Rentier
+OrganizationScheduleCreateRTitle ident@Text: New schedule rule | #{ident} | Rentier
+OrganizationScheduleUpdateRTitle ident@Text: Edit schedule rule | #{ident} | Rentier
+OrganizationScheduleDeleteRTitle ident@Text: Delete schedule rule | #{ident} | Rentier
+PropertyCreateRTitle ident@Text: New property | #{ident} | Rentier
+PropertyUpdateRTitle ident@Text: #{ident} | Rentier
+EmployeeListRTitle ident@Text: Employees | #{ident} | Rentier
+EmployeeCreateRTitle ident@Text: New employee | #{ident} | Rentier
 
 LoginAsMerchant: Login as merchant
 LoginAsEmployee: Login as employee

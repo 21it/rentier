@@ -80,6 +80,11 @@ library:
       ghc-options:
       - -Wall
       - -fwarn-tabs
+      - -j4
+      - +RTS
+      - -A128m
+      - -n2m
+      - -RTS
       - -O0
       - -optl-fuse-ld=gold
       ld-options:

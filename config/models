@@ -3,110 +3,93 @@
 
 --
 -- Generic user which can login to system
--- "ident" is external provider uid which is used to login to system
+-- ident = external identity provider uid
 --
+
 User
-    ident Text
-    firstName Text Maybe
-    lastName Text Maybe
-    UniqueUser ident
-    deriving Typeable
+  ident Text
+  firstName Text Maybe
+  lastName Text Maybe
+  UniqueUser ident
+  deriving Typeable
 
 --
 --  active = is operational or not
---  exists = used instead of explicit delete (we are not really removing anything from our DB)
---
-
---
--- Merchant can register himself and add new Organization, Property etc
--- 1 Merchant = 1 Mobile app
--- Initial payment ~ 200€
--- After payment is done, initialized = True and
--- Admins and Customers can login and make orders
---
-
---
--- In the end of the month invoice (10% fee) is generated
--- Invoice will be applied after 3 days
--- If balance is negative then Merchant is blocked (active = False)
+--  exists = used instead of row delete
 --
 
 Merchant
-    userId UserId
-    baseCurrencyCode Rentier.Currency.Code
-    balance Rational
-    initialized Bool default=False
-    active Bool default=True
-    exists Bool default=True
-    UniqueMerchant userId
+  userId UserId
+  baseCurrencyCode Rentier.Currency.Code
+  balance Rational
+  initialized Bool default=False
+  active Bool default=True
+  exists Bool default=True
+  UniqueMerchant userId
 
 Organization
-    name Text
-    merchantId MerchantId
-    baseCurrencyCode Rentier.Currency.Code
-    defaultMinimalRentDuration TimeOfDay
-    defaultIframeTimeResolution TimeOfDay
-    active Bool default=True
-    exists Bool default=True
-    UniqueOrganization name merchantId
+  name Text
+  merchantId MerchantId
+  baseCurrencyCode Rentier.Currency.Code
+  defaultMinimalRentDuration TimeOfDay
+  defaultIframeTimeResolution TimeOfDay
+  active Bool default=True
+  exists Bool default=True
+  UniqueOrganization name merchantId
 
 --
--- If openAt > closeAt then closeAt is in next day
+-- If startsAt > endsAt then endsAt is in next day
 --
 
 OrganizationSchedule
-    organizationId OrganizationId
-    weekDays [Rentier.WeekDay.WeekDay]
-    startsAt TimeOfDay
-    endsAt TimeOfDay
-    minimalRentDuration TimeOfDay
-    timeKind Rentier.Time.TimeKind
+  organizationId OrganizationId
+  weekDays [Rentier.WeekDay.WeekDay]
+  startsAt TimeOfDay
+  endsAt TimeOfDay
+  minimalRentDuration TimeOfDay
+  timeKind Rentier.Time.TimeKind
 
 Property
-    name Text
-    organizationId OrganizationId
-    kind PropertyKind
-    availability PropertyAvailability
-    -- if qty = Nothing then amount of this Property is unlimited (tips etc)
-    -- if qty = Just(Int) then Property is enumerable (rooms, guitars etc)
-    qty Int Maybe
-    -- price for baseRentDuration time of rent Session
-    basePrice Rational
-    baseRentDuration TimeOfDay
-    iframeTimeResolution TimeOfDay
-    active Bool default=True
-    exists Bool default=True
-    UniqueProperty name organizationId
+  name Text
+  organizationId OrganizationId
+  kind PropertyKind
+  availability PropertyAvailability
+  -- if qty = Nothing then amount of this Property is unlimited (tips etc)
+  -- if qty = Just(Int) then Property is enumerable (rooms, guitars etc)
+  qty Int Maybe
+  -- price for baseRentDuration amount of time
+  basePrice Rational
+  baseRentDuration TimeOfDay
+  iframeTimeResolution TimeOfDay
+  active Bool default=True
+  exists Bool default=True
+  UniqueProperty name organizationId
 
 Employee
-    merchantId MerchantId
-    ident Text
-    invitationStatus EmployeeInvitationStatus
-    active Bool default=True
-    exists Bool default=True
-    UniqueEmployee merchantId ident
+  merchantId MerchantId
+  ident Text
+  invitationStatus EmployeeInvitationStatus
+  active Bool default=True
+  exists Bool default=True
+  UniqueEmployee merchantId ident
 
 Customer
-    organizationId OrganizationId
-    userId UserId
-    balance Rational
-    UniqueCustomer organizationId userId
+  organizationId OrganizationId
+  userId UserId
+  balance Rational
+  UniqueCustomer organizationId userId
 
 Session
-    customerId CustomerId
-    startsAt UTCTime
-    endsAt UTCTime
-    status SessionStatus
-    customerComment Text Maybe
-    employeeComment Text Maybe
+  customerId CustomerId
+  startsAt UTCTime
+  endsAt UTCTime
+  status SessionStatus
+  customerComment Text Maybe
+  employeeComment Text Maybe
 
 SessionProperty
-    sessionId SessionId
-    propertyId PropertyId
-    qty Int
-    price Rational
-    UniqueSessionProperty sessionId propertyId
-
-SessionPayment
-    sessionId SessionId
-    amount Rational
+  sessionId SessionId
+  propertyId PropertyId
+  qty Int
+  price Rational
+  UniqueSessionProperty sessionId propertyId

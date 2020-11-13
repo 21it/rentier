@@ -30,8 +30,6 @@ stanzas:
       # You can specify one or more hostnames for your application to respond
       # to. The primary hostname will be used for generating your application
       # root.
-      - reservify.org
-      - reserfy.net
       - rentier.ml
 
     # Enable to force Keter to redirect to https
@@ -41,8 +39,6 @@ stanzas:
   # Static files.
   - type: static-files
     hosts:
-      - static.reservify.org
-      - static.reserfy.net
       - static.rentier.ml
     root: ../static
 
@@ -53,12 +49,8 @@ stanzas:
   # - type: redirect
   #
   #   hosts:
-  #     - reservify.org
-  #     - reserfy.net
   #     - rentier.ml
   #   actions:
-  #     - host: www.reservify.org
-  #     - host: www.reserfy.net
   #     - host: www.rentier.ml
         # secure: false
         # port: 80

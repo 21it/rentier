@@ -74,20 +74,20 @@ IframePropertyScheduleRBreadcrumb: Расписание
 IframeSessionCreateRBreadcrumb: Бронь
 IframeSessionConfirmRBreadcrumb: Подтвердить
 
-HomeRTitle: Добро пожаловать | Reserfy
-SignoutRTitle: Выйти | Reserfy
-ProfileRTitle ident@Text: #{ident} | Reserfy
-MerchantCreateRTitle ident@Text: #{ident} | Reserfy
-OrganizationListRTitle ident@Text: Организации | #{ident} | Reserfy
-OrganizationCreateRTitle ident@Text: Новая организация | #{ident} | Reserfy
-OrganizationUpdateRTitle ident@Text: #{ident} | Reserfy
-OrganizationScheduleCreateRTitle ident@Text: Задать правило расписания | #{ident} | Reserfy
-OrganizationScheduleUpdateRTitle ident@Text: Изменить правило расписания | #{ident} | Reserfy
-OrganizationScheduleDeleteRTitle ident@Text: Удалить правило расписания | #{ident} | Reserfy
-PropertyCreateRTitle ident@Text: Новая собственность | #{ident} | Reserfy
-PropertyUpdateRTitle ident@Text: #{ident} | Reserfy
-EmployeeListRTitle ident@Text: Работники | #{ident} | Reserfy
-EmployeeCreateRTitle ident@Text: Новый работник | #{ident} | Reserfy
+HomeRTitle: Добро пожаловать | Rentier
+SignoutRTitle: Выйти | Rentier
+ProfileRTitle ident@Text: #{ident} | Rentier
+MerchantCreateRTitle ident@Text: #{ident} | Rentier
+OrganizationListRTitle ident@Text: Организации | #{ident} | Rentier
+OrganizationCreateRTitle ident@Text: Новая организация | #{ident} | Rentier
+OrganizationUpdateRTitle ident@Text: #{ident} | Rentier
+OrganizationScheduleCreateRTitle ident@Text: Задать правило расписания | #{ident} | Rentier
+OrganizationScheduleUpdateRTitle ident@Text: Изменить правило расписания | #{ident} | Rentier
+OrganizationScheduleDeleteRTitle ident@Text: Удалить правило расписания | #{ident} | Rentier
+PropertyCreateRTitle ident@Text: Новая собственность | #{ident} | Rentier
+PropertyUpdateRTitle ident@Text: #{ident} | Rentier
+EmployeeListRTitle ident@Text: Работники | #{ident} | Rentier
+EmployeeCreateRTitle ident@Text: Новый работник | #{ident} | Rentier
 
 LoginAsMerchant: Войти как предприниматель
 LoginAsEmployee: Войти как работник
