@@ -69,11 +69,21 @@ dependencies:
 - range
 - iso8601-time
 - esqueleto
+- universum
 
 # The library contains all of our application code. The executable
 # defined below is just a thin wrapper.
 library:
   source-dirs: src
+  default-extensions:
+  - NoImplicitPrelude
+  - MultiParamTypeClasses
+  - LambdaCase
+  - OverloadedStrings
+  - ScopedTypeVariables
+  - GeneralizedNewtypeDeriving
+  - InstanceSigs
+  - TemplateHaskell
   when:
   - condition: (flag(dev)) || (flag(library-only))
     then:

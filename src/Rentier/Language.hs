@@ -1,20 +1,20 @@
-{-# LANGUAGE InstanceSigs      #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
-
 module Rentier.Language where
 
-import           Data.Text
-import           Database.Persist.TH
-import           Text.Read
-import           Yesod.Core.Dispatch
+import Data.Text
+import Database.Persist.TH
+import Import.External
+import Yesod.Core.Dispatch
 
-data Code = En | Ru deriving (Show, Read, Eq, Enum, Bounded)
+data Code
+  = En
+  | Ru
+  deriving (Show, Read, Eq, Enum, Bounded)
+
 derivePersistField "Code"
 
 codeList :: [Code]
 codeList =
-  [minBound..maxBound]
+  [minBound .. maxBound]
 
 instance PathPiece Code where
   fromPathPiece :: Text -> Maybe Code

@@ -1,2 +1,10 @@
 module Rentier.BootstrapColor where
-data BootstrapColor = Success | Info | Warning | Danger deriving (Show, Read, Eq)
+
+import Import.External
+
+data BootstrapColor
+  = Success
+  | Info
+  | Warning
+  | Danger
+  deriving (Show, Read, Eq)

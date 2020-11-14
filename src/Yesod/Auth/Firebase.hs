@@ -14,8 +14,7 @@ module Yesod.Auth.Firebase
   )
 where
 
-import Control.Error.Util
-import Control.Lens (_Just, preview)
+import Control.Lens (_Just)
 import Control.Monad.Trans.Except (runExceptT)
 import qualified Crypto.JOSE.JWK as JWK
 import Crypto.JOSE.JWK.Store (VerificationKeyStore (..))
@@ -26,7 +25,6 @@ import Data.Aeson
 import Data.ByteString
 import qualified Data.ByteString.Char8
 import qualified Data.ByteString.Lazy.Char8
-import Data.Either.Combinators
 import Data.EitherR
 import Data.HashMap.Strict
 import Data.Map.Strict
@@ -35,7 +33,7 @@ import qualified Data.PEM as Pem
 import Data.Text
 import Data.Time.Clock
 import qualified Data.X509 as X509
-import Lens.Micro ((&), (.~))
+import Import.External
 import Network.HTTP.Simple
 import Safe
 import Yesod.Auth

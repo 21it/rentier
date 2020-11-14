@@ -20,8 +20,8 @@ import Database.Persist.Sql (ConnectionPool, runSqlPool)
 import Import.NoFoundation
 -- import           Yesod.Auth.GoogleEmail2
 
-import qualified Rentier.CookieKind
 import qualified Rentier.Currency
+import Rentier.Data.Type
 import qualified Rentier.Language
 import Rentier.Permission
 import Rentier.Time
@@ -640,15 +640,15 @@ unsafeHandler = Unsafe.fakeHandlerGetLogger appLogger
 
 deleteUserRole :: Handler ()
 deleteUserRole =
-  deleteSession (pack $ show Rentier.CookieKind.UserRole)
+  deleteSession (pack $ show UserRole)
 
 setUserRole :: UserRole -> Handler ()
 setUserRole userRole =
-  setSession (pack $ show Rentier.CookieKind.UserRole) (pack $ show userRole)
+  setSession (pack $ show UserRole) (pack $ show userRole)
 
 lookupUserRole :: Handler (Maybe UserRole)
 lookupUserRole = do
-  mval <- lookupSession (pack $ show Rentier.CookieKind.UserRole)
+  mval <- lookupSession (pack $ show UserRole)
   return $ case mval of
     Just val -> Text.Read.readMaybe $ unpack val
     Nothing -> Nothing

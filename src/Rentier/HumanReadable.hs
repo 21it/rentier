@@ -1,15 +1,13 @@
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
 
 module Rentier.HumanReadable where
 
-import           Import
-import           Rentier.EmployeeInvitationStatus
-import           Rentier.Property
-import           Rentier.Time
-import           Rentier.WeekDay
-import           RIO.Time
+import Import
+import RIO.Time
+import Rentier.Data.Type
+import Rentier.EmployeeInvitationStatus
+import Rentier.Property
+import Rentier.Time
 
 class HumanReadable a where
   toMsg :: a -> AppMessage
@@ -25,46 +23,46 @@ instance HumanReadable AppMessage where
 
 instance HumanReadable TimeKind where
   toMsg WorkingTime = MsgWorkingTime
-  toMsg BreakTime   = MsgBreakTime
+  toMsg BreakTime = MsgBreakTime
 
 instance HumanReadable PropertyKind where
-  toMsg Primary   = MsgPrimary
+  toMsg Primary = MsgPrimary
   toMsg Secondary = MsgSecondary
 
 instance HumanReadable PropertyAvailability where
   toMsg InOrganization = MsgInOrganization
-  toMsg Anytime        = MsgAnytime
+  toMsg Anytime = MsgAnytime
 
 instance HumanReadable TimeOfDay where
   toMsg x = MsgProxy $ pack $ formatTime defaultTimeLocale "%R" x
 
 instance HumanReadable WeekDay where
-  toMsg Sunday    = MsgSunday
-  toMsg Monday    = MsgMonday
-  toMsg Tuesday   = MsgTuesday
+  toMsg Sunday = MsgSunday
+  toMsg Monday = MsgMonday
+  toMsg Tuesday = MsgTuesday
   toMsg Wednesday = MsgWednesday
-  toMsg Thursday  = MsgThursday
-  toMsg Friday    = MsgFriday
-  toMsg Saturday  = MsgSaturday
+  toMsg Thursday = MsgThursday
+  toMsg Friday = MsgFriday
+  toMsg Saturday = MsgSaturday
 
-  toShortMsg Sunday    = MsgShortSunday
-  toShortMsg Monday    = MsgShortMonday
-  toShortMsg Tuesday   = MsgShortTuesday
+  toShortMsg Sunday = MsgShortSunday
+  toShortMsg Monday = MsgShortMonday
+  toShortMsg Tuesday = MsgShortTuesday
   toShortMsg Wednesday = MsgShortWednesday
-  toShortMsg Thursday  = MsgShortThursday
-  toShortMsg Friday    = MsgShortFriday
-  toShortMsg Saturday  = MsgShortSaturday
+  toShortMsg Thursday = MsgShortThursday
+  toShortMsg Friday = MsgShortFriday
+  toShortMsg Saturday = MsgShortSaturday
 
 instance Show a => HumanReadable (Maybe a) where
-  toMsg Nothing  = MsgProxy ""
+  toMsg Nothing = MsgProxy ""
   toMsg (Just a) = (MsgProxy . pack . show) a
 
 instance HumanReadable Bool where
-  toMsg True  = MsgYes
+  toMsg True = MsgYes
   toMsg False = MsgNo
 
 instance HumanReadable EmployeeInvitationStatus where
-  toMsg Pending  = MsgEmployeeInvitationStatusPending
+  toMsg Pending = MsgEmployeeInvitationStatusPending
   toMsg Accepted = MsgEmployeeInvitationStatusAccepted
   toMsg Declined = MsgEmployeeInvitationStatusDeclined
 

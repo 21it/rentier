@@ -1,20 +1,23 @@
-{-# LANGUAGE InstanceSigs    #-}
-{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE InstanceSigs #-}
 
 module Rentier.Time where
 
-import           Data.Text
-import           Data.Time.ISO8601
-import           Data.Time.LocalTime
-import           Database.Persist.TH
-import           RIO.Time
-import           Yesod.Core.Dispatch
+import Data.Text
+import Data.Time.ISO8601
+import Data.Time.LocalTime
+import Database.Persist.TH
+import Import.External
+import RIO.Time
+import Yesod.Core.Dispatch
 
 data TimeKind = WorkingTime | BreakTime deriving (Show, Read, Eq, Enum, Bounded)
+
 derivePersistField "TimeKind"
 
 type Minutes = Int
+
 data MinutesRange = MinutesRange Minutes Minutes
+
 newtype UTC = UTC UTCTime deriving (Show, Read, Eq)
 
 tod2mins :: TimeOfDay -> Minutes
@@ -38,10 +41,10 @@ minsPerDay = 1440
 
 createUTCTime :: Day -> Minutes -> UTCTime
 createUTCTime d m =
-  UTCTime{
-    utctDay = addDays (toInteger $ div m minsPerDay) d,
-    utctDayTime = secondsToDiffTime $ toInteger (mod m minsPerDay) * 60
-  }
+  UTCTime
+    { utctDay = addDays (toInteger $ div m minsPerDay) d,
+      utctDayTime = secondsToDiffTime $ toInteger (mod m minsPerDay) * 60
+    }
 
 todFromUTCTime :: UTCTime -> TimeOfDay
 todFromUTCTime = localTimeOfDay . utcToLocalTime utc

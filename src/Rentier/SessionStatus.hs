@@ -1,19 +1,21 @@
-{-# LANGUAGE InstanceSigs    #-}
+{-# LANGUAGE InstanceSigs #-}
 {-# LANGUAGE TemplateHaskell #-}
+
 module Rentier.SessionStatus where
 
-import           Data.Text
-import           Database.Persist.TH
-import           Text.Read
-import           Yesod.Core.Dispatch
+import Data.Text
+import Database.Persist.TH
+import Import.External
+import Yesod.Core.Dispatch
 
-data SessionStatus = Reserved |
-                     CancelledSoft |
-                     CancelledHard |
-                     Ignored |
-                     AwaitingForPayment |
-                     Payed
-                     deriving (Show, Read, Eq, Enum, Bounded)
+data SessionStatus
+  = Reserved
+  | CancelledSoft
+  | CancelledHard
+  | Ignored
+  | AwaitingForPayment
+  | Payed
+  deriving (Show, Read, Eq, Enum, Bounded)
 
 derivePersistField "SessionStatus"
 

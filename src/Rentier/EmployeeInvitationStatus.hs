@@ -1,13 +1,16 @@
-{-# LANGUAGE InstanceSigs    #-}
-{-# LANGUAGE TemplateHaskell #-}
 module Rentier.EmployeeInvitationStatus where
 
-import           Data.Text
-import           Database.Persist.TH
-import           Text.Read
-import           Yesod.Core.Dispatch
+import Data.Text
+import Database.Persist.TH
+import Import.External
+import Yesod.Core.Dispatch
 
-data EmployeeInvitationStatus = Pending | Accepted | Declined deriving (Show, Read, Eq, Enum, Bounded)
+data EmployeeInvitationStatus
+  = Pending
+  | Accepted
+  | Declined
+  deriving (Show, Read, Eq, Enum, Bounded)
+
 derivePersistField "EmployeeInvitationStatus"
 
 instance PathPiece EmployeeInvitationStatus where

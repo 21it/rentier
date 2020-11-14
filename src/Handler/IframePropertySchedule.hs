@@ -1,11 +1,7 @@
-{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE QuasiQuotes #-}
-{-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 
 module Handler.IframePropertySchedule where
 
@@ -15,12 +11,12 @@ import Data.Time.Clock
 import Data.Time.ISO8601
 import qualified Database.Persist as P
 import Import
+import Rentier.Data.Type
 import Rentier.FullCalendar
 import Rentier.HumanReadable
 import Rentier.Organization
 import Rentier.Property
 import Rentier.Time
-import Rentier.WeekDay
 
 getIframePropertyScheduleR :: PropertyId -> Handler TypedContent
 getIframePropertyScheduleR propertyId = do
