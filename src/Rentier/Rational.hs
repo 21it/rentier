@@ -1,7 +1,6 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE InstanceSigs #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeSynonymInstances #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module Rentier.Rational
@@ -14,7 +13,6 @@ import Data.Ratio
 import Data.Text hiding (take)
 import Data.Text.Read
 import Import.External
-import Yesod.Core.Dispatch
 import Prelude (shows)
 
 displayRational :: Int -> Rational -> Text

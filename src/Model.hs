@@ -10,6 +10,7 @@ module Model where
 import ClassyPrelude.Yesod
 import Data.Time.LocalTime (TimeOfDay)
 import Database.Persist.Quasi
+import Import.External (coerce)
 import qualified Rentier.Currency
 import Rentier.Data.Type
 import Rentier.EmployeeInvitationStatus
@@ -24,3 +25,6 @@ import qualified Rentier.Time
 share
   [mkPersist sqlSettings, mkMigrate "migrateAll"]
   $(persistFileWith lowerCaseSettings "config/models")
+
+instance ToMessage User where
+  toMessage = coerce . userIdent

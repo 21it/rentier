@@ -4,7 +4,6 @@ module Rentier.HumanReadable where
 
 import Import
 import RIO.Time
-import Rentier.Data.Type
 import Rentier.EmployeeInvitationStatus
 import Rentier.Property
 import Rentier.Time

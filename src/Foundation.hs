@@ -552,19 +552,21 @@ instance YesodAuth App where
     Creds App ->
     m (AuthenticationResult App)
   authenticate creds = liftHandler $ runDB $ do
-    x <- getBy $ UniqueUser $ credsIdent creds
+    x <- getBy $ UniqueUser uid
     case x of
-      Just (Entity uid _) ->
-        return $ Authenticated uid
+      Just (Entity k _) ->
+        return $ Authenticated k
       Nothing -> do
         userId <-
           insert400
             User
-              { userIdent = credsIdent creds,
+              { userIdent = uid,
                 userFirstName = Nothing,
                 userLastName = Nothing
               }
         return $ Authenticated userId
+    where
+      uid = UserIdent' $ credsIdent creds
 
   -- You can add other plugins like Google Email, email or OAuth here
   authPlugins :: App -> [AuthPlugin App]

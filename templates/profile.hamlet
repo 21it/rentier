@@ -3,7 +3,7 @@
     $case mrole
       $of Nothing
         <p .lead.text-center>
-          _{MsgProfilePageGreetAnon ident}
+          _{MsgProfilePageGreetAnon model}
         <div .col-xs-12>
           <a href="@{MerchantCreateR}" .btn.btn-warning.col-xs-12>
             _{MsgLoginAsMerchant}
@@ -12,7 +12,7 @@
             _{MsgLoginAsEmployee}
       $of Just (UserRoleMerchant merchantId)
         <p .lead.text-center>
-          _{MsgProfilePageGreetMerchant ident}
+          _{MsgProfilePageGreetMerchant model}
         <div .col-xs-12>
           <a href="@{OrganizationListR merchantId}" .btn.btn-warning.col-xs-12>
             _{MsgMyOrganizations}
@@ -21,9 +21,9 @@
             _{MsgMyEmployees}
       $of Just UserRoleEmployee
         <p .lead.text-center>
-          _{MsgProfilePageGreetEmployee ident}
+          _{MsgProfilePageGreetEmployee model}
       $of Just UserRoleCustomer
         <p .lead.text-center>
-          _{MsgProfilePageGreetCustomer ident}
+          _{MsgProfilePageGreetCustomer model}
   <div .row.margin-top>
     ^{form}

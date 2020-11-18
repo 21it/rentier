@@ -1,11 +1,11 @@
 module Import
-  ( module Import,
+  ( module X,
   )
 where
 
-import Database.Esqueleto as Import hiding (Value)
-import Foundation as Import
-import Import.NoFoundation as Import hiding
+import Database.Esqueleto as X hiding (Value)
+import Foundation as X
+import Import.NoFoundation as X hiding
   ( (!=.),
     (*=.),
     (+=.),
@@ -27,3 +27,4 @@ import Import.NoFoundation as Import hiding
     update,
     (||.),
   )
+import Rentier.Data.Type as X

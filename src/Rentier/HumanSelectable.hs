@@ -6,7 +6,6 @@
 module Rentier.HumanSelectable where
 
 import Import
-import Rentier.Data.Type
 import Rentier.HumanReadable
 import Rentier.Property
 import Rentier.Time

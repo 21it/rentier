@@ -7,9 +7,9 @@
 --
 
 User
-  ident Text
-  firstName Text Maybe
-  lastName Text Maybe
+  ident UserIdent'
+  firstName FirstName Maybe
+  lastName LastName Maybe
   UniqueUser ident
   deriving Typeable
 
@@ -67,7 +67,7 @@ Property
 
 Employee
   merchantId MerchantId
-  ident Text
+  ident UserIdent'
   invitationStatus EmployeeInvitationStatus
   active Bool default=True
   exists Bool default=True

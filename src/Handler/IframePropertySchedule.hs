@@ -11,7 +11,6 @@ import Data.Time.Clock
 import Data.Time.ISO8601
 import qualified Database.Persist as P
 import Import
-import Rentier.Data.Type
 import Rentier.FullCalendar
 import Rentier.HumanReadable
 import Rentier.Organization
@@ -35,14 +34,23 @@ getIframePropertyScheduleR propertyId = do
           --
           hr2Text <- getMessageRender
           noLayout $ do
-            let iframeTimeResolution = toMsg $ organizationDefaultIframeTimeResolution org
-            setTitleI MsgHomeRTitle
-            addStylesheet $ StaticR fullcalendar_4_1_0_packages_core_main_css
-            addStylesheet $ StaticR fullcalendar_4_1_0_packages_daygrid_main_css
-            addStylesheet $ StaticR fullcalendar_4_1_0_packages_timegrid_main_css
-            addScript $ StaticR fullcalendar_4_1_0_packages_core_main_js
-            addScript $ StaticR fullcalendar_4_1_0_packages_daygrid_main_js
-            addScript $ StaticR fullcalendar_4_1_0_packages_timegrid_main_js
+            let iframeTimeResolution =
+                  toMsg $
+                    organizationDefaultIframeTimeResolution org
+            setTitleI
+              MsgHomeRTitle
+            addStylesheet $
+              StaticR fullcalendar_4_1_0_packages_core_main_css
+            addStylesheet $
+              StaticR fullcalendar_4_1_0_packages_daygrid_main_css
+            addStylesheet $
+              StaticR fullcalendar_4_1_0_packages_timegrid_main_css
+            addScript $
+              StaticR fullcalendar_4_1_0_packages_core_main_js
+            addScript $
+              StaticR fullcalendar_4_1_0_packages_daygrid_main_js
+            addScript $
+              StaticR fullcalendar_4_1_0_packages_timegrid_main_js
             $(widgetFile "iframe_property_schedule")
         provideRep $ do
           --

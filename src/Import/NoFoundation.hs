@@ -4,6 +4,7 @@ module Import.NoFoundation
 where
 
 import ClassyPrelude.Yesod as X
+import Import.External as X (coerce)
 import Model as X
 import Settings as X
 import Settings.StaticFiles as X

@@ -76,18 +76,18 @@ IframeSessionConfirmRBreadcrumb: Подтвердить
 
 HomeRTitle: Добро пожаловать | Rentier
 SignoutRTitle: Выйти | Rentier
-ProfileRTitle ident@Text: #{ident} | Rentier
-MerchantCreateRTitle ident@Text: #{ident} | Rentier
-OrganizationListRTitle ident@Text: Организации | #{ident} | Rentier
-OrganizationCreateRTitle ident@Text: Новая организация | #{ident} | Rentier
+ProfileRTitle x@User: #{x} | Rentier
+MerchantCreateRTitle x@User: #{x} | Rentier
+OrganizationListRTitle x@User: Организации | #{x} | Rentier
+OrganizationCreateRTitle x@User: Новая организация | #{x} | Rentier
 OrganizationUpdateRTitle ident@Text: #{ident} | Rentier
 OrganizationScheduleCreateRTitle ident@Text: Задать правило расписания | #{ident} | Rentier
 OrganizationScheduleUpdateRTitle ident@Text: Изменить правило расписания | #{ident} | Rentier
 OrganizationScheduleDeleteRTitle ident@Text: Удалить правило расписания | #{ident} | Rentier
 PropertyCreateRTitle ident@Text: Новая собственность | #{ident} | Rentier
 PropertyUpdateRTitle ident@Text: #{ident} | Rentier
-EmployeeListRTitle ident@Text: Работники | #{ident} | Rentier
-EmployeeCreateRTitle ident@Text: Новый работник | #{ident} | Rentier
+EmployeeListRTitle x@User: Работники | #{x} | Rentier
+EmployeeCreateRTitle x@User: Новый работник | #{x} | Rentier
 
 LoginAsMerchant: Войти как предприниматель
 LoginAsEmployee: Войти как работник
@@ -106,10 +106,10 @@ Iso3166v1: ru
 HomeBigHeader: Современное решение для онлайн бронирования
 HomeSmallHeader: Одна система. Все платформы. Бесплатно.
 
-ProfilePageGreetAnon ident@Text: Вы вошли как #{ident}
-ProfilePageGreetMerchant ident@Text: Вы вошли как предприниматель, #{ident}
-ProfilePageGreetEmployee ident@Text: Вы вошли как работник, #{ident}
-ProfilePageGreetCustomer ident@Text: Вы вошли как клиент, #{ident}
+ProfilePageGreetAnon x@User: Вы вошли как #{x}
+ProfilePageGreetMerchant x@User: Вы вошли как предприниматель, #{x}
+ProfilePageGreetEmployee x@User: Вы вошли как работник, #{x}
+ProfilePageGreetCustomer x@User: Вы вошли как клиент, #{x}
 ProfilePageUpdate: Обновить мой профиль
 ProfilePageUpdated: Профиль был обновлён
 

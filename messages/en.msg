@@ -76,18 +76,18 @@ IframeSessionConfirmRBreadcrumb: Confirm
 
 HomeRTitle: Welcome | Rentier
 SignoutRTitle: Logout | Rentier
-ProfileRTitle ident@Text: #{ident} | Rentier
-MerchantCreateRTitle ident@Text: #{ident} | Rentier
-OrganizationListRTitle ident@Text: Organizations | #{ident} | Rentier
-OrganizationCreateRTitle ident@Text: New organization | #{ident} | Rentier
+ProfileRTitle x@User: #{x} | Rentier
+MerchantCreateRTitle x@User: #{x} | Rentier
+OrganizationListRTitle x@User: Organizations | #{x} | Rentier
+OrganizationCreateRTitle x@User: New organization | #{x} | Rentier
 OrganizationUpdateRTitle ident@Text: #{ident} | Rentier
 OrganizationScheduleCreateRTitle ident@Text: New schedule rule | #{ident} | Rentier
 OrganizationScheduleUpdateRTitle ident@Text: Edit schedule rule | #{ident} | Rentier
 OrganizationScheduleDeleteRTitle ident@Text: Delete schedule rule | #{ident} | Rentier
 PropertyCreateRTitle ident@Text: New property | #{ident} | Rentier
 PropertyUpdateRTitle ident@Text: #{ident} | Rentier
-EmployeeListRTitle ident@Text: Employees | #{ident} | Rentier
-EmployeeCreateRTitle ident@Text: New employee | #{ident} | Rentier
+EmployeeListRTitle x@User: Employees | #{x} | Rentier
+EmployeeCreateRTitle x@User: New employee | #{x} | Rentier
 
 LoginAsMerchant: Login as merchant
 LoginAsEmployee: Login as employee
@@ -106,10 +106,10 @@ Iso3166v1: ee
 HomeBigHeader: Modern solution for online reservations
 HomeSmallHeader: One system. All platforms. For free.
 
-ProfilePageGreetAnon ident@Text: You are logged in, #{ident}
-ProfilePageGreetMerchant ident@Text: You are logged in as merchant, #{ident}
-ProfilePageGreetEmployee ident@Text: You are logged in as employee, #{ident}
-ProfilePageGreetCustomer ident@Text: You are logged in as customer, #{ident}
+ProfilePageGreetAnon x@User: You are logged in, #{x}
+ProfilePageGreetMerchant x@User: You are logged in as merchant, #{x}
+ProfilePageGreetEmployee x@User: You are logged in as employee, #{x}
+ProfilePageGreetCustomer x@User: You are logged in as customer, #{x}
 ProfilePageUpdate: Update my profile
 ProfilePageUpdated: Profile has been updated
 
