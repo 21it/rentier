@@ -3,7 +3,6 @@ module Rentier.EmployeeInvitationStatus where
 import Data.Text
 import Database.Persist.TH
 import Import.External
-import Yesod.Core.Dispatch
 
 data EmployeeInvitationStatus
   = Pending

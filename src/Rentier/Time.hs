@@ -8,7 +8,6 @@ import Data.Time.LocalTime
 import Database.Persist.TH
 import Import.External
 import RIO.Time
-import Yesod.Core.Dispatch
 
 data TimeKind = WorkingTime | BreakTime deriving (Show, Read, Eq, Enum, Bounded)
 
